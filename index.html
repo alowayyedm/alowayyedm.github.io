@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mohammed Al Owayyed | PhD Candidate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="assets/your-photo.jpg" alt="Mohammed Al Owayyed" class="profile-pic">
+    <h1>Mohammed Al Owayyed</h1>
+    <p>PhD Candidate | TU Delft</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#cv">CV</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a PhD candidate in the Interactive Intelligence Group at TU Delft, supervised by Dr. Willem-Paul Brinkman and Dr. Myrthe Tielman. 
+      I earned my MSc in Computer Science from TU Delft in 2020, and my BSc in Software Engineering (cum laude) from King Saud University (KSU) in 2016.
+    </p>
+    <p>
+      My research focuses on Human-Computer Interaction, Behavior Change Technologies, Conversational Agents, and Educational Systems. 
+      I design interactive training tools that simulate social interactions to support social skill development, such as virtual agents for child helpline counselor training.
+    </p>
+    <p>
+      I have co-supervised five MSc theses and over a dozen BSc projects. I am also a member of the PROTECt ME Consortium and TU Delft’s Ethics Review Team.
+    </p>
+  </section>
+
+  <section id="cv">
+    <h2>Curriculum Vitae</h2>
+
+    <h3>Education</h3>
+    <ul>
+      <li><strong>MSc Computer Science</strong>, TU Delft, 2020<br>
+        Thesis: “Motivating PhD candidates with depression symptoms to complete thought-strengthening exercises via a conversational agent.”</li>
+      <li><strong>BSc Software Engineering</strong>, King Saud University, 2016 – Cum Laude (GPA: 4.72/5)</li>
+    </ul>
+
+    <h3>Work Experience</h3>
+    <ul>
+      <li><strong>PhD Candidate</strong>, Interactive Intelligence Group, TU Delft (2022–present)</li>
+      <li><strong>Lecturer</strong>, Department of Software Engineering, King Saud University (2016–present)</li>
+    </ul>
+
+    <h3>Teaching</h3>
+    <ul>
+      <li>Courses: Human-Computer Interaction, Software Engineering, Web Development, SQA, Testing, Maintenance</li>
+      <li>Supervision: 5 MSc theses, 13+ BSc projects</li>
+    </ul>
+
+    <h3>Internships & Certifications</h3>
+    <ul>
+      <li>IBM IoT Lab Internship, Durham, NC (2015)</li>
+      <li>IBM Blockchain Developer (2020), Mobile App Dev (2017)</li>
+    </ul>
+
+    <h3>Skills</h3>
+    <ul>
+      <li><strong>Programming:</strong> Java, Python, R, HTML, PHP, SQL, LaTeX</li>
+      <li><strong>Languages:</strong> Arabic (Native), English (Fluent, IELTS: 8), Dutch (Beginner)</li>
+    </ul>
+      <h3>Other Activities</h3>
+<ul>
+  <li><strong>Podcast Co-host:</strong> Jisser — discussing AI, society, and science topics</li>
+  <li><strong>YouTube Creator:</strong> ExtraMHD — creating research-based content on video games' culture, and history</li>
+  <li><strong>e-Sports Organizer:</strong> Planned and hosted several gaming tournaments focused on educational and social dimensions</li>
+</ul>
+
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <div id="pubs">
+      <p>Loading publications from Google Scholar...</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: alowayyedm [at] gmail [dot] com</p>
+    <p>
+      <a href="https://scholar.google.com/citations?user=Vyzor4gAAAAJ">Google Scholar</a> |
+      <a href="https://orcid.org/0000-0002-9680-9204">ORCID</a> |
+      <a href="https://github.com/alowayyedm">GitHub</a>
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Mohammed Al Owayyed</p>
+  </footer>
+
+<script>
+fetch("https://pub.orcid.org/v3.0/0000-0002-9680-9204/works", {
+  headers: { Accept: "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+  const works = data.group;
+  const container = document.getElementById("pubs");
+  container.innerHTML = "";
+
+  // Sort and group by year
+  const byYear = {};
+  works.forEach(workGroup => {
+    const summary = workGroup["work-summary"][0];
+    const title = summary.title.title.value;
+    const year = summary["publication-date"]?.year?.value || "No Year";
+    const journal = summary["journal-title"]?.value || "";
+    const url = summary["url"]?.value || "#";
+
+    if (!byYear[year]) byYear[year] = [];
+    byYear[year].push({ title, journal, url });
+  });
+
+  const sortedYears = Object.keys(byYear).sort((a, b) => b - a);
+  sortedYears.forEach(year => {
+    const section = document.createElement("div");
+    section.innerHTML = `<h4>${year}</h4><ul>` +
+      byYear[year].map(pub =>
+        `<li><a href="${pub.url}" target="_blank"><strong>${pub.title}</strong></a>` +
+        (pub.journal ? ` – <em>${pub.journal}</em>` : "") +
+        `</li>`
+      ).join("") + "</ul>";
+    container.appendChild(section);
+  });
+});
+</script>
+
+    
+</body>
+</html>
