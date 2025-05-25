@@ -8,18 +8,18 @@
 </head>
 <body>
   <header>
-    <img src="assets/your-photo.jpg" alt="Mohammed Al Owayyed" class="profile-pic">
+    <img src="assets/photo.jpg" alt="Mohammed Al Owayyed" class="profile-pic">
     <h1>Mohammed Al Owayyed</h1>
     <p>PhD Candidate | TU Delft</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#cv">CV</a>
-      <a href="#publications">Publications</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<nav>
+  <button onclick="showSection('about')">About</button>
+  <button onclick="showSection('cv')">CV</button>
+  <button onclick="showSection('publications')">Publications</button>
+  <button onclick="showSection('contact')">Contact</button>
+</nav>
   </header>
 
-  <section id="about">
+<section id="about" class="tab-section">
     <h2>About Me</h2>
     <p>
       I am a PhD candidate in the Interactive Intelligence Group at TU Delft, supervised by Dr. Willem-Paul Brinkman and Dr. Myrthe Tielman. 
@@ -30,11 +30,11 @@
       I design interactive training tools that simulate social interactions to support social skill development, such as virtual agents for child helpline counselor training.
     </p>
     <p>
-      I have co-supervised five MSc theses and over a dozen BSc projects. I am also a member of the PROTECt ME Consortium and TU Delft’s Ethics Review Team.
+      I have co-supervised five MSc theses students and over a dozen BSc students. I am also a member of the PROTECt ME Consortium and TU Delft’s Ethics Review Team.
     </p>
   </section>
 
-  <section id="cv">
+<section id="cv" class="tab-section" style="display: none;">
     <h2>Curriculum Vitae</h2>
 
     <h3>Education</h3>
@@ -76,7 +76,7 @@
 
   </section>
 
-  <section id="publications">
+<section id="publications" class="tab-section" style="display: none;">
     <h2>Publications</h2>
     <div id="pubs">
       <p>Loading publications from Google Scholar...</p>
@@ -132,6 +132,13 @@ fetch("https://pub.orcid.org/v3.0/0000-0002-9680-9204/works", {
     container.appendChild(section);
   });
 });
+    
+    
+    function showSection(id) {
+  document.querySelectorAll('.tab-section').forEach(section => {
+    section.style.display = (section.id === id) ? 'block' : 'none';
+  });
+}
 </script>
 
     
